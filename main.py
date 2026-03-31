@@ -8,15 +8,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI(
-    title="GORA HRMS AI Backend",
-    description="AI-powered features for HRMS",
+    title="GoraSphere AI Backend",
+    description="AI-powered features for GoraSphere HRMS",
     version="1.0.0"
 )
 
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Update with specific origins in production
+    allow_origins=[
+        "https://dev.gorasphere.com",
+        "https://gorasphere-hrms.pages.dev",
+        "http://localhost:3000"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,7 +45,7 @@ class AIResponse(BaseModel):
 async def root():
     return {
         "status": "ok",
-        "message": "GORA HRMS AI Backend is running"
+        "message": "GoraSphere AI Backend is running"
     }
 
 @app.get("/health", response_model=HealthResponse)
